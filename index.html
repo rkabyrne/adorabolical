@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Works In Progress" />
+	<title>Adorabolical</title>
+	<style>
+		:root { --background: #ddd; --text: #222; color-scheme: light; }
+		@media (prefers-color-scheme: dark) { :root { --background: #222; --text: #ddd; color-scheme: dark; } }
+		* { font-family: monospace; line-height: 1.5em; margin: 0; }
+		body { background: var(--background); color: var(--text); margin: 2em; }
+		ul { list-style-type: none; }
+		.tree { margin: 0; padding: 0; }
+		.icon { height: 1.25em; width: 1.25em; margin-bottom: -.25em; }
+		.tab { margin-left: 1.5em; }
+		.caret { cursor: pointer; user-select: none; }
+		.caret::before { content: "\25B6"; display: inline-block; margin-right: .5em; }
+		.caret-down::before { transform: rotate(90deg); }
+		.nested { display: none; margin-left: -1.5em; }
+		.active { display: block; }
+	</style>
+</head>
+<body>
+	<h1>🦝 Adorabolical</h1>
+	<h2><a href="mailto:rkabyrne@pm.me">RKAByrne</a></h2>
+	<h3>Work in Progress</h3>
+	<h4 id="modDate"></h4>
+	<hr>
+	<div id="hello-world">
+		<p>&nbsp;</p>
+		<p>Hello, world.</p>
+		<p>&nbsp;</p>
+	</div>
+	<hr>
+	<div id="fedora-linux-45-beta">
+		<ul class="tree">
+			<li><span class="caret">Fedora Linux 45 Beta</span>
+				<ul class="nested">
+					<li><span class="caret">Overview</span></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div id="fedora-linux-44-workstation">
+		<ul class="tree">
+			<li><span class="caret">Fedora Linux 44 Workstation</span>
+				<ul class="nested">
+					<li><span class="caret">Overview:</span>
+						<ul class="nested">
+							<li class="tab"><a href="https://fedoraproject.org/">Fedora</a> is an independent project under a legal responsibility of Red Hat to coordinate the development of Fedora Linux, a Linux-based operating system, operating with the mission of creating "an innovative platform for hardware, clouds, and containers that enables software developers and community members to build tailored solutions for their users".</li>
+							<li class="tab"><a href="https://www.linux.org/">Linux</a> is a family of free and open-source software Unix-like operating systems based on the Linux kernel, which was first released on 17 September 1991 by Linus Torvalds. Some members of the family are typically packaged as a distribution, which includes the kernel alongside supporting system software and libraries developed by third parties—such as GNU, Red Hat, and X.Org—to create a complete operating system; however, not all Linux-based operating systems are considered distros, with Android being an example. Linux was originally designed as a clone of Unix and is distributed under the copyleft GPL license.</li>
+						</ul>
+					</li>
+					<li><span class="caret">Media & Installation:</span>
+						<ul class="nested">
+							<li class="tab">Fedora Workstation 44 <a href="https://download.fedoraproject.org/pub/fedora/linux/releases/44/Workstation/x86_64/iso/Fedora-Workstation-Live-44-1.7.x86_64.iso">Intel/AMD x86_64</a> or <a href="https://download.fedoraproject.org/pub/fedora/linux/releases/44/Workstation/aarch64/iso/Fedora-Workstation-Live-44-1.7.aarch64.iso">ARM aarch64</a></li>
+							<li class="tab">Fedora Media Writer <a href="https://flathub.org/apps/details/org.fedoraproject.MediaWriter">Flathub</a> or <a href="https://github.com/FedoraQt/MediaWriter/releases/tag/5.3.2">Mac & Windows</a></li>
+							<li class="tab">Recommend cold boot, factory default BIOS/UEFI reset, minimal connections.</li>
+							<li class="tab">Finish the Fedora graphical installer completely.</li>
+							<li class="tab">Boot the installed system normally.</li>
+							<li class="tab">Keep the computer connected to AC power.</li>
+							<li class="tab">Do not install proprietary and 3rd-party drivers from unrelated sources.</li>
+							<li class="tab">Do not disable Secure Boot merely because installation is inconvenient.</li>
+							<li class="tab">If ever in doubt, repeat the next operation.</li>
+						</ul>
+					</li>
+					<li><span class="caret">Reboot?</span>
+						<ul class="nested">
+							<li class="tab">sudo dnf upgrade --refresh</li>
+							<li class="tab">systemctl reboot</li>
+						</ul>
+					</li>
+					<li><span class="caret">System Identification</span>
+						<ul class="nested">
+							<li class="tab">sudo dnf upgrade --refresh</li>
+							<li class="tab">cat /etc/fedora-release</li>
+							<li class="tab">uname -m</li>
+							<li class="tab">dnf --version</li>
+							<li class="tab">hostnamectl</li>
+							<li class="tab">lspci -nn | grep -Ei 'vga|3d|display|network|audio'</li>
+						</ul>
+					</li>
+					<li><span class="caret">Firmware & Updates:</span>
+						<ul class="nested">
+							<li class="tab">sudo dnf upgrade --refresh</li>
+							<li class="tab">fwupdmgr refresh --force</li>
+							<li class="tab">fwupdmgr get-devices</li>
+							<li class="tab">fwupdmgr get-updates</li>
+							<li class="tab">fwupdmgr update</li>
+						</ul>
+					</li>
+					<li><span class="caret">Set RTC Time:</span>
+						<ul class="nested">
+							<li class="tab">sudo timedatectl set-local-rtc 0</li>
+						</ul>
+					</li>
+					<li><span class="caret">Confirm Firewall:</span>
+						<ul class="nested">
+							<li class="tab">sudo systemctl enable --now firewalld</li>
+							<li class="tab">sudo firewall-cmd --permanent --add-service=kdeconnect</li>
+							<li class="tab">sudo firewall-cmd --permanent --add-service=mdns</li>
+							<li class="tab">sudo firewall-cmd --reload</li>
+							<li class="tab">sudo firewall-cmd --list-all</li>
+						</ul>
+					</li>
+					<li><span class="caret">Set Your Hostname:</span>
+						<ul class="nested">
+							<li class="tab">hostnamectl</li>
+							<li class="tab">sudo hostnamectl set-hostname your-hostname</li>
+						</ul>
+					</li>
+					<li><span class="caret">Automatic Updates:</span>
+						<ul class="nested">
+							<li class="tab">sudo dnf install dnf-automatic</li>
+							<li class="tab">sudo systemctl enable --now dnf-automatic.timer</li>
+						</ul>
+					</li>
+					<li><span class="caret">RPM Fusion Repositories:</span>
+						<ul class="nested">
+							<li class="tab">sudo dnf install \</li>
+							<li class="tab">https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \</li>
+							<li class="tab">https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm</li>
+							<li class="tab">sudo dnf upgrade --refresh</li>
+						</ul>
+					</li>
+					<li><span class="caret">Flatpak & Flathub Repository:</span>
+						<ul class="nested">
+							<li class="tab">flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo</li>
+							<li class="tab">flatpak update</li>
+						</ul>
+					</li>
+					<li><span class="caret">Generate SSH Keys:</span>
+						<ul class="nested">
+							<li class="tab">ssh-keygen -t ed25519 -C "your_email@example.com"</li>
+							<li class="tab">eval "$(ssh-agent -s)"</li>
+							<li class="tab">ssh-add ~/.ssh/id_ed25519</li>
+							<li class="tab">cat ~/.ssh/id_ed25519.pub</li>
+						</ul>
+					</li>
+					<li><span class="caret">DNF Configuration:</span>
+						<ul class="nested">
+							<li class="tab">sudo nano /etc/dnf/dnf.conf</li>
+							<li>Insert into [main]:</li>
+							<li class="tab">max_parallel_downloads=16</li>
+							<li class="tab">defaultyes=True</li>
+							<li class="tab">keepcache=True</li>
+							<li>Use fastest mirror:</li>
+							<li class="tab">sudo dnf config-manager unsetopt fastestmirror</li>
+						</ul>
+					</li>
+					<li><span class="caret">AppImage Support:</span>
+						<ul class="nested">
+							<li class="tab">sudo dnf install fuse-libs</li>
+						</ul>
+					</li>
+					<li><span class="caret">Swap Free/Full FFmpeg:</span>
+						<ul class="nested">
+							<li class="tab">sudo dnf swap ffmpeg-free ffmpeg --allowerasing</li>
+						</ul>
+					</li>
+					<li><span class="caret">Multimedia Codecs:</span>
+						<ul class="nested">
+							<li class="tab">sudo dnf group install multimedia</li>
+						</ul>
+					</li>
+					<li><span class="caret">GStreamer Multimedia Codecs:</span>
+						<ul class="nested">
+							<li class="tab">sudo dnf install --setopt="install_weak_deps=False" \</li>
+							<li class="tab">gstreamer1-devel \</li>
+							<li class="tab">gstreamer1-doc \</li>
+							<li class="tab">gstreamer1-plugin-libav \</li>
+							<li class="tab">gstreamer1-plugin-openh264 \</li>
+							<li class="tab">gstreamer1-plugins-base-devel \</li>
+							<li class="tab">gstreamer1-plugins-base-tools \</li>
+							<li class="tab">gstreamer1-plugins-good \</li>
+							<li class="tab">gstreamer1-plugins-good-extras \</li>
+							<li class="tab">gstreamer1-plugins-bad-free \</li>
+							<li class="tab">gstreamer1-plugins-bad-free-devel \</li>
+							<li class="tab">gstreamer1-plugins-bad-free-extras \</li>
+							<li class="tab">gstreamer1-plugins-bad-freeworld \</li>
+							<li class="tab">gstreamer1-plugins-ugly \</li>
+							<li class="tab">gstreamer1-plugins-ugly-free \</li>
+							<li class="tab">--exclude=PackageKit-gstreamer-plugin</li>
+						</ul>
+					</li>
+					<li><span class="caret">OpenH264 for Firefox:</span>
+						<ul class="nested">
+							<li class="tab">sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1</li>
+							<li>Open Firefox, Settings, Plugins - verify OpenH264 enabled.</li>
+						</ul>
+					</li>
+					<li><span class="caret">DVD Playback:</span>
+						<ul class="nested">
+							<li class="tab">sudo dnf install rpmfusion-free-release-tainted</li>
+							<li class="tab">sudo dnf install libdvdcss</li>
+						</ul>
+					</li>
+					<li><span class="caret">Improve Bluetooth Audio:</span>
+						<ul class="nested">
+							<li class="tab">sudo dnf install libfreeaptx libldac fdk-aac</li>
+						</ul>
+					</li>
+					<li><span class="caret">AMD Setup:</span>
+						<ul class="nested">
+							<li>Firmware:</li>
+							<li class="tab">sudo dnf install linux-firmware</li>
+							<li>Vulkan Support:</li>
+							<li class="tab">sudo dnf install vulkan-tools mesa-vulkan-drivers</li>
+							<li>ROCm GPU Compute:</li>
+							<li class="tab">sudo dnf install rocm-opencl</li>
+						</ul>
+					</li>
+					<li><span class="caret">NVIDIA Drivers:</span>
+						<ul class="nested">
+							<li>Check secure boot status:</li>
+							<li class="tab">mokutil --sb-state</li>
+							<li>Install the driver:</li>
+							<li class="tab">sudo dnf install akmod-nvidia</li>
+							<li>For older branches:</li>
+							<li class="tab">sudo dnf install akmod-nvidia-xxxxx</li>
+							<li>For CUDA support:</li>
+							<li class="tab">sudo dnf install xorg-x11-drv-nvidia-cuda</li>
+						</ul>
+					</li>
+					<li><span class="caret">Hardware Video Acceleration:</span>
+						<ul class="nested">
+							<li>Intel Generation 8 and newer:</li>
+							<li class="tab">sudo dnf install intel-media-driver</li>
+							<li>Intel Pre-Generation 8:</li>
+							<li class="tab">sudo dnf install libva-intel-driver</li>
+							<li>AMD swap from MESA:</li>
+							<li class="tab">sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld</li>
+							<li class="tab">sudo dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld</li>
+							<li>NVIDIA VA-API:</li>
+							<li class="tab">sudo dnf install nvidia-vaapi-driver</li>
+							<li>Firefox hardware acceleration:</li>
+							<li class="tab">sudo dnf install ffmpeg-libs</li>
+							<li class="tab">vainfo</li>
+						</ul>
+					</li>
+					<li><span class="caret">Power Management:</span>
+						<ul class="nested">
+							<li class="tab">sudo dnf install tlp tlp-rdw</li>
+							<li class="tab">sudo systemctl enable tlp --now</li>
+							<li class="tab">sudo systemctl stop power-profiles-daemon</li>
+							<li class="tab">sudo systemctl mask power-profiles-daemon</li>
+						</ul>
+					</li>
+					<li><span class="caret">Thermal Management:</span>
+						<ul class="nested">
+							<li class="tab">sudo dnf install thermald</li>
+							<li class="tab">sudo systemctl enable --now thermald</li>
+						</ul>
+					</li>
+					<li><span class="caret">Disable NetworkManager Wait:</span>
+						<ul class="nested">
+							<li class="tab">sudo systemctl disable NetworkManager-wait-online.service</li>
+						</ul>
+					</li>
+					<li><span class="caret">Tweaks & Extensions:</span>
+						<ul class="nested">
+							<li class="tab">sudo dnf install gnome-tweaks</li>
+							<li class="tab">flatpak install flathub com.mattjakeman.ExtensionManager</li>
+						</ul>
+					</li>
+					<li><span class="caret">Docker:</span>
+						<ul class="nested">
+							<li>Repository:</li>
+							<li class="tab">sudo dnf config-manager addrepo --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo</li>
+							<li class="tab">curl -fsSL https://get.docker.com | sudo sh</li>
+							<li>Install:</li>
+							<li class="tab">sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</li>
+							<li>Enable & Verify:</li>
+							<li class="tab">sudo systemctl enable --now docker</li>
+							<li class="tab">sudo systemctl status docker</li>
+							<li class="tab">sudo docker run hello-world</li>
+							<li class="tab">sudo docker version</li>
+							<li class="tab">sudo docker compose version</li>
+						</ul>
+					</li>
+					<li><span class="caret">VS Code Setup:</span>
+						<ul class="nested">
+							<li class="tab">sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc</li>
+							<li class="tab">printf '%s\n' '[code]' 'name=Visual Studio Code' 'baseurl=https://packages.microsoft.com/yumrepos/vscode' 'enabled=1' 'autorefresh=1' 'type=rpm-md' 'gpgcheck=1' 'gpgkey=https://packages.microsoft.com/keys/microsoft.asc' | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null</li>
+							<li class="tab">sudo dnf check-update && sudo dnf install code</li>
+						</ul>
+					</li>
+					<li><span class="caret">Gaming Setup:</span>
+						<ul class="nested">
+							<li class="tab">sudo dnf install gamemode</li>
+							<li class="tab">sudo dnf install mangohud</li>
+							<li class="tab">sudo dnf install steam</li>
+							<li class="tab">sudo dnf install wine</li>
+							<li class="tab">sudo dnf install vulkan-tools</li>
+						</ul>
+					</li>
+					<li><span class="caret">Streaming & Recording:</span>
+						<ul class="nested">
+							<li>Repositories:</li>
+							<li class="tab">sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm</li>
+							<li>Install OBS Studio:</li>
+							<li class="tab">sudo dnf install obs-studio</li>
+							<li class="tab">sudo dnf install obs-studio-plugin-x264</li>
+							<li class="tab">sudo dnf install akmod-v4l2loopback</li>
+							<li class="tab">obs --version</li>
+							<li>Install OpenShot:</li>
+							<li class="tab">sudo dnf install openshot</li>
+							<li class="tab">openshot-qt --version</li>
+							<li>Install Shotcut:</li>
+							<li class="tab">sudo dnf install shotcut</li>
+							<li class="tab">shotcut --version</li>
+						</ul>
+					</li>
+					<li><span class="caret">Final Exam:</span>
+						<ul class="nested">
+							<li class="tab">cat /etc/fedora-release</li>
+							<li class="tab">uname -r</li>
+							<li class="tab">uptime</li>
+							<li class="tab">systemctl --failed</li>
+							<li class="tab">systemctl is-active firewalld</li>
+							<li class="tab">timedatectl</li>
+							<li class="tab">hostnamectl</li>
+							<li class="tab">dnf repolist</li>
+							<li class="tab">flatpak remotes</li>
+							<li class="tab">lspci -nn | grep -Ei 'vga|3d|display'</li>
+							<li class="tab">lsusb</li>
+							<li class="tab">df -h</li>
+							<li class="tab">free -h</li>
+						</ul>
+					</li>
+					<li><span class="caret">Reboot!</span>
+						<ul class="nested">
+							<li class="tab">sudo dnf upgrade --refresh</li>
+							<li class="tab">systemctl reboot</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			var modDateEl = document.getElementById("modDate");
+			if (modDateEl) { 
+				modDateEl.innerText = "Modified " + document.lastModified; 
+			}
+			var toggler = document.getElementsByClassName("caret");
+			for (var i = 0; i < toggler.length; i++) {
+				toggler[i].addEventListener("click", function() {
+					var nested = this.parentElement.querySelector(".nested");
+					if (nested) { 
+						nested.classList.toggle("active"); 
+					}
+					this.classList.toggle("caret-down");
+				});
+			}
+		});
+	</script>
+</body>
+</html>
