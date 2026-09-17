@@ -30,6 +30,7 @@
 	<div id="hello-world">
 		<p>&nbsp;</p>
 		<p>Hello, world.</p>
+		<p id="weather">Getting your local weather…</p>
 		<p>&nbsp;</p>
 	</div>
 	<hr>
@@ -338,21 +339,43 @@
 		</ul>
 	</div>
 	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			var modDateEl = document.getElementById("modDate");
-			if (modDateEl) { 
-				modDateEl.innerText = "Modified " + document.lastModified; 
-			}
-			var toggler = document.getElementsByClassName("caret");
-			for (var i = 0; i < toggler.length; i++) {
-				toggler[i].addEventListener("click", function() {
-					var nested = this.parentElement.querySelector(".nested");
-					if (nested) { 
-						nested.classList.toggle("active"); 
-					}
+		document.addEventListener("DOMContentLoaded", function () {
+			const modDateEl = document.getElementById("modDate");
+			if (modDateEl) { modDateEl.textContent = `Modified ${document.lastModified}`; }
+			const toggler = document.getElementsByClassName("caret");
+			for (let i = 0; i < toggler.length; i++) {
+				toggler[i].addEventListener("click", function () {
+					const nested = this.parentElement.querySelector(".nested");
+					if (nested) { nested.classList.toggle("active"); }
 					this.classList.toggle("caret-down");
 				});
 			}
+			const output = document.getElementById("weather");
+			if (!output) { return; }
+			if (!navigator.geolocation) { output.textContent = "Geolocation is not supported."; return; }
+				navigator.geolocation.getCurrentPosition(
+				async ({ coords }) => {
+					const { latitude, longitude } = coords;
+					const url =
+						"https://api.open-meteo.com/v1/forecast" +
+						`?latitude=${latitude}` +
+						`&longitude=${longitude}` +
+						"&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m" +
+						"&temperature_unit=fahrenheit" +
+						"&wind_speed_unit=mph";
+					try {
+						const response = await fetch(url);
+						if (!response.ok) { throw new Error("Weather request failed."); }
+						const data = await response.json();
+						const current = data.current;
+						output.textContent =
+							`${current.temperature_2m}°F, ` +
+							`Wind ${current.wind_speed_10m} MPH, ` +
+							`Humidity ${current.relative_humidity_2m}%`;
+					} catch (error) { output.textContent = "Unable to load weather."; console.error(error); }},
+				() => { 	output.textContent = "Location was denied."; },
+				{ enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }
+			);
 		});
 	</script>
 </body>
